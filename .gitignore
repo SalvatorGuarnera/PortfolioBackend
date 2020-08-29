@@ -65,4 +65,4 @@ node_modules/
 .env
 
 #Configuration
-./functions/util/config
+.config.js
