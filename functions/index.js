@@ -1,5 +1,5 @@
 const functions = require('firebase-functions');
-
+//Cors policy
 const cors = require('cors');
 const app = require('express')();
 app.use(cors({origin: true}));
