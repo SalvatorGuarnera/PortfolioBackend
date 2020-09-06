@@ -29,4 +29,15 @@ exports.validateProjectData = (data) => {
     valid: Object.keys(errors).length === 0 ? true : false
   };
 
-}
+};
+
+exports.validateResumeData = (data) => {
+  let errors = {};
+
+  if(isEmpty(data.resume)) errors.resume = "Must not be empty";
+
+  return {
+    errors,
+    valid: Object.keys(errors).length === 0 ? true : false
+  };
+};

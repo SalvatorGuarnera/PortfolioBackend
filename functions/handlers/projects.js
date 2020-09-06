@@ -30,6 +30,34 @@ exports.createProject = (req, res) => {
         });
 };
 
+exports.updateProject = (req, res) => {
+
+    const newProjectData = {
+        rank: req.body.rank,
+        name: req.body.name,
+        technologies: req.body.technologies,
+        about: req.body.about,
+        linkSet: req.body.linkSet,
+        isPrivate: req.body.isPrivate,
+        inProgress: req.body.inProgress,
+        banner: req.body.banner,
+    };
+
+    const { valid, errors } = validateProjectData(newProjectData);
+    if (!valid) return res.status(400).json(errors);
+
+    db.collection('projects').doc(req.params.projectId)
+        .set(newProjectData)
+        .then(() => {
+            return res.status(200).json({message : "Successfully updated project data"});
+        })
+        .catch((err) => {
+            console.error(err);
+            return res.status(500).json({error: err.code});
+        });
+
+}
+
 exports.getProject = (req, res) => {
     let projectData = {};
     db.doc(`/projects/${req.params.projectId}`)
